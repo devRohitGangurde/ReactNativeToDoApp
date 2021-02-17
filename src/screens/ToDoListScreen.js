@@ -20,8 +20,9 @@ export default function ToDoListScreen() {
   const [temptodos, setTempTodos] = useState([]);
 
   // Add todo item
-  const addTodo = () => {
+  const addTodo = (title) => {
     if (title.length > 0) {
+      setTitle('');
       if (title.length < 30) {
         setTodos([...todos, {key: Date.now(), name: title}]);
         setTitle('');
@@ -67,9 +68,10 @@ export default function ToDoListScreen() {
   return (
     <View style={styles.container}>
       <Toolbar />
-      {/* <Todo key={todo.key}/> */}
+
       <View style={styles.todo}>
-        <TextInput
+        <Todo onSave={addTodo} />
+        {/* <TextInput
           placeholder={StringConstant.PLACEHOLER_TEXT}
           value={title}
           onChangeText={(value) => setTitle(value)}
@@ -79,7 +81,7 @@ export default function ToDoListScreen() {
           title={StringConstant.BUTTON_TEXT}
           color="#83B7B3"
           onPress={() => addTodo()}
-        />
+        /> */}
       </View>
 
       <View style={styles.todo}>
@@ -116,14 +118,14 @@ export default function ToDoListScreen() {
       </View>
 
       <View style={{flexDirection: 'row'}}>
-        <View styles={{flex: 1, marginStart: 10}}>
+        <View styles={{flex: 1, marginEnd: 10, justifyContent: 'center'}}>
           <Button
             title={StringConstant.SORT_NAME}
             color="#83B7B3"
             onPress={() => sortByName()}
           />
         </View>
-        <View styles={{flex: 1, marginEnd: 50}}>
+        <View styles={{flex: 1, marginStart: 50}}>
           <Button
             title={StringConstant.SORT_TIME}
             color="#83B7B3"
